@@ -1,5 +1,9 @@
 # Linked Lists
 
+### Objectives
+
+- Describe the low-level structure of arrays and linked lists.  
+
 
 ## What are linked lists?
 
@@ -21,12 +25,12 @@ A little! But not 100%.  Let's step back and take a closer look at arrays. Their
 Arrays store data in one continuous block of computer memory.  The computer sets aside just enough memory when the array is created. You can think of your computer's memory as a giant city full of identical buildings. Using an array is like renting out a bunch of adjacent buildings.
 
 
-![cartoon city skyline](https://cloud.githubusercontent.com/assets/3254910/14589266/b990b3a6-0492-11e6-922e-46cf0517fa64.png) 
+![cartoon city skyline](https://cloud.githubusercontent.com/assets/3254910/14589266/b990b3a6-0492-11e6-922e-46cf0517fa64.png)
 
 
-This makes it really convenient to find all the data in an array. Your computer knows where each piece of data is stored because it knows where your array's territory starts and how big each building is.  Your computer can move from one location in the array to the next about as easily as you go down the street.
+This makes it really convenient to find all the data in an array. Your computer knows where each piece of data is stored because it knows where your array's territory starts and how big each building is.  Your computer can move from one location in the array to the next about as easily as you stroll down the street.
 
-On the other hand, your computer needs to know from the start exactly how many buildings you need -- how big the array will be. And, if you ever need more space, your computer has to find a new continuous block of empty buildings (free memory) that's big enough to fit the array.
+On the other hand, your computer needs to know from the start exactly how many buildings you need -- how big the array will be. And, if you ever need more space, your computer has to find a new continuous row of empty buildings big enough for you - a new block of free memory that can fit the entire array.
 
 **But wait! You've never had to worry about array size...**
 
@@ -36,11 +40,16 @@ But! in interviews it's good to know what's happening in the background, because
 
 #### Array / Linked List Tradeoff
 
-Creating a linked list is a bit like renting buildings all around the city, wherever it's convenient.  Your computer knows the address of the headquarters (the head of the linked list), and each building manager has the address of the next building you own.
+Creating a linked list is a bit like renting buildings all around the city, wherever it's convenient.   From there on, you just add a new building whenever you need one, wherever you can find one available. With linked lists, each building is a "node" in the list.  
+
 
 
 <img height="350px" alt="academy of arts university map" src="https://cloud.githubusercontent.com/assets/3254910/14611060/52180c84-0545-11e6-9323-d33706d377e5.png">
 
+
+In our analogy, you delegate a lot! You would know the address of the headquarters (the head or first node of the linked list). In a singly linked list, every node stores a pointer that gives the memory address of the next node. This is like letting each building manager keep track of just their address and the address of the *next* building you own.  In a doubly linked list, each node has pointers to the *next* and the *previous* node.
+
+### Pros and Cons
 
 **Linked lists don't need to be resized with one giant block of memory;** they can grow with pointers to other parts of the computer's memory.  You don't have to find continuous free space.
 
@@ -56,7 +65,7 @@ On the other hand...
 
 
 
-## Applications
+## Real-world Uses
 
 * **file systems** Files are often stored in chunks, but when files grow large they may not fit in their original chunk. You can think of a file as a series of nodes with chunks of data and links to the next section of the file. (They're often actually implemented with a more complex related data structure called a B-tree.)
 
