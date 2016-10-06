@@ -4,7 +4,7 @@ require_relative '../solutions/node'
 describe Node do
   let!(:node) { Node.new('hello') }
 
-  describe '#initialize' do
+  describe '::new' do
     it 'sets data instance variable based on argument' do
       expect(node.data).to eq('hello')
     end
