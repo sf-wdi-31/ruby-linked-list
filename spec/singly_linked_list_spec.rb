@@ -1,5 +1,5 @@
-# require_relative '../models/singly_linked_list'
-require_relative '../solutions/singly_linked_list'
+require_relative '../starter-code/singly_linked_list'
+# require_relative '../solutions/singly_linked_list'
 
 describe SinglyLinkedList do
 
@@ -44,6 +44,7 @@ describe SinglyLinkedList do
       expect(list.head).to eq(node)
     end
   end
+
   describe '#head=' do
     let!(:node) { Node.new 123 }
     let!(:other_node) { Node.new 456 }
@@ -59,6 +60,23 @@ describe SinglyLinkedList do
     end
   end
 
+  describe '#inspect' do
+    # format data1.inspect (head) -> datb.inspect -> data3.inspect
+    let(:node) { Node.new 123 }
+    let(:other_node) { Node.new 456 }
+    let(:node_b) { Node.new 'b' }
+    subject(:empty_list) { SinglyLinkedList.new nil }
+    subject(:list) { SinglyLinkedList.new node }
+    it 'returns a human-readable string version of the list' do
+      expect(list.inspect).to eq('123 (head) -> nil')
+      node.next=other_node
+      other_node.next=node_b
+      expect(list.inspect).to eq('123 (head) -> 456 -> b -> nil')
+    end
+    it 'handles empty lists' do
+      expect(empty_list.inspect).to eq('nil (head)')
+    end
+  end
 
   describe '#empty?' do
     context 'when head of the list is nil' do
@@ -76,132 +94,228 @@ describe SinglyLinkedList do
     end
   end
 
-  # describe 'tail attribute (bonus)' do
-  #   it 'allows getting and setting a tail' do
-  #   end
-  #
-  #   it 'validates that the tail is a Node or nil' do
-  #   end
-  # end
-
   describe '#length' do
-    it 'returns the number of nodes in the list' do
-
-    end
+    let(:node_a) { Node.new 'a' }
+    let(:node_b) { Node.new 'b' }
+    subject(:list) { SinglyLinkedList.new nil }
     it 'returns 0 for an empty list' do
-
+      expect(list.length).to eq 0
+    end
+    it 'returns the number of nodes in the list' do
+      node_a.next = node_b
+      list.head = node_a
+      expect(list.length).to eq 2
     end
   end
 
-  # describe '#append' do
-  #   let(:node_a) { Node.new 'a' }
-  #   let(:node_b) { Node.new 'b' }
-  #   subject(:list) { SinglyLinkedList.new node_a }
-  #   # takes in data for a new node
-  #   # appends either to the list
-  #   # sets a new tail for the list (bonus)
-  #   # if the list was empty, sets a new head for the list
-  #   it 'takes in data for the new node' do
-  #     expect(list).to respond_to(:append).with(1).argument # TODO passing early
-  #   end
-  #   it 'increases the length of the list' do
-  #     expect{ list.append(7) }.to change{ list.length }.from(1).to(2)
-  #     expect{ list.append(node_b) }.to change{ list.length }.from(2).to(3)
-  #   end
-  #   #  it 'sets the newly added node as the tail of the list' do
-  #   #  #  bonus
-  #   #  end
-  #   context 'when list is empty' do
-  #     let(:node) { Node.new 'b' }
-  #     subject(:list) { SinglyLinkedList.new nil }
-  #     it 'sets the newly added node as the head of the list' do
-  #       expect{ list.append node }.to change{ list.head }.from(nil).to(node)
-  #     end
-  #   end
-  # end
+  describe '#append' do
+    let(:node_a) { Node.new 'a' }
+    let(:node_b) { Node.new 'b' }
+    subject(:list) { SinglyLinkedList.new node_a }
+    # takes in data for a new node
+    # appends either to the list
+    # sets a new tail for the list (bonus)
+    # if the list was empty, sets a new head for the list
+    it 'takes in data for the new node' do
+      expect(list).to respond_to(:append).with(1).argument
+    end
+    it 'increases the length of the list by 1' do
+      expect{ list.append(7) }.to change{ list.length }.from(1).to(2)
+      expect{ list.append(node_b) }.to change{ list.length }.from(2).to(3)
+    end
+    #  it 'sets the newly added node as the tail of the list' do
+    #  #  bonus
+    #  end
+    context 'when list is empty' do
+      let(:node) { Node.new 'b' }
+      subject(:list) { SinglyLinkedList.new nil }
+      it 'sets the newly added node as the head of the list' do
+        expect{ list.append node }.to change{ list.head }.from(nil).to(node)
+      end
+    end
+  end
 
-  # describe '#inspect' do
-  #   # format data1.inspect (Head) -> data2.inspect -> data3.inspect
-  #   it 'returns a human-readable string version of the list' do
-  #   end
-  #   it 'includes all nodes in the list' do
-  #   end
-  #   it 'uses each node\'s inspect method' do
-  #   end
-  #   it 'handles empty lists' do
-  #   end
-  # end
+  describe '#insert_at_start' do
+    let(:node_a) { Node.new 'a' }
+    let(:node_b) { Node.new 'b' }
+    subject(:list) { SinglyLinkedList.new node_a }
+    it 'takes in an argument (for the new node)' do
+      expect(list).to respond_to(:insert_at_start).with(1).argument
+    end
+    it 'increases the length of the list by 1' do
+      expect{ list.insert_at_start(7) }.to change{ list.length }.from(1).to(2)
+      expect{ list.insert_at_start(node_b) }.to change{ list.length }.from(2).to(3)
+    end
+    it 'sets the head of the linked list to be the new node' do
+      expect{ list.insert_at_start(node_b) }.to change{ list.head }.from(node_a).to(node_b)
+      expect{ list.insert_at_start(10) }.to change{ list.head.data }.from('b').to(10)
+    end
+    it 'uses the old head as the next node for the new node' do
+      expect{ list.insert_at_start(node_b) }.to change{ node_b.next }.from(nil).to(node_a)
+      expect{ list.insert_at_start(10) }.to change{ list.head.next }.from(node_a).to(node_b)
+    end
+    # context 'when list is empty' do
+    #   it 'sets the tail of the list to be the new node' do
+    #
+    #   end
+    # end
+  end
 
-  # describe '#prepend' do
-  #   it 'increases the length of the list by 1' do
-  #
-  #   end
-  #   it 'takes in data for the new node' do
-  #
-  #   end
-  #   it 'creates a new node with the given data' do
-  #
-  #   end
-  #   it 'adds the new node at the beginning of the list' do
-  #
-  #   end
-  #   it 'sets the head of the linked list to be the new node' do
-  #
-  #   end
-  #   context 'when list is empty' do
-  #     it 'sets the tail of the list to be the new node' do
-  #
-  #     end
-  #   end
-  # end
+  describe '#data_exists?' do
+    let(:node_a) { Node.new 'a' }
+    subject(:list) { SinglyLinkedList.new node_a }
+    it 'takes in an argument (for the data to match)' do
+      expect(list).to respond_to(:data_exists?).with(1).argument
+    end
+    it 'returns true if the list has a node with that data' do
+      expect(list.data_exists? 'a').to be true
+    end
+    it 'returns false if the list does not have a node with that data' do
+      expect(list.data_exists? 'not there').to be false
+    end
+  end
 
+  describe '#node_exists?' do
+    let(:node_a) { Node.new 'a' }
+    let(:node_b) { Node.new 'b' }
+    let(:node_c) { Node.new 'c' }
+    subject(:list) { SinglyLinkedList.new node_a }
+    it 'takes in an argument (for the node to match)' do
+      expect(list).to respond_to(:node_exists?).with(1).argument
+    end
+    it 'returns true if the list includes that node' do
+      list.append node_b
+      list.append node_c
+      expect(list.node_exists? node_a).to be true
+      expect(list.node_exists? node_b).to be true
+      expect(list.node_exists? node_c).to be true
+    end
+    it 'returns false if the list does not include that node' do
+      expect(list.node_exists? Node.new('not there')).to be false
+    end
+  end
 
+  describe '#delete' do
+    let(:node_a) { Node.new 'a' }
+    let(:node_b) { Node.new 'b' }
+    subject(:list) { SinglyLinkedList.new node_a }
+    it 'takes in an argument (for the node to delete)' do
+      expect(list).to respond_to(:delete).with(1).argument
+    end
+    it 'removes one node' do
+      expect{ list.delete(node_a) }.to change{ list.length }.from(1).to(0)
+    end
+    it 'updates head if needed' do
+      list.append node_b
+      expect {list.delete(node_a)}.to change{ list.head }.from(node_a).to(node_b)
+    end
+  end
 
-  # describe '#includes?' do
-  #   it 'takes in some data' do
-  #
-  #   end
-  #   it 'returns true if the list has a node with that data' do
-  #
-  #   end
-  #   it 'returns false if the last does not have a node with that data' do
-  #
-  #   end
-  # end
+  describe '#delete_with_data' do
+    let(:node_a) { Node.new 'a' }
+    let(:node_b) { Node.new 'b' }
+    subject(:list) { SinglyLinkedList.new node_a }
+    it 'takes in an argument (for the node to delete)' do
+      expect(list).to respond_to(:delete_with_data).with(1).argument
+    end
+    it 'reduces the length of the list by 1' do
+      expect{ list.delete_with_data('a') }.to change{ list.length }.from(1).to(0)
+    end
+    it 'updates head if needed' do
+      list.append node_b
+      expect {list.delete_with_data('a')}.to change{ list.head }.from(node_a).to(node_b)
+    end
+  end
 
-  # describe '#delete' do
-  #   it 'takes in some data' do
-  #
-  #   end
-  #   it 'removes one node' do
-  #
-  #   end
-  #   it 'removes the *first* node with that data' do
-  #
-  #   end
-  # end
+  describe '#remove_from_end' do
+    context 'non-empty list' do
+      let(:node_1) { Node.new 1 }
+      let(:node_2) { Node.new 2 }
+      let(:node_3) { Node.new 3 }
+      subject(:list) { SinglyLinkedList.new node_1 }
 
-  # describe '#insert_as_nth' do
-  #   it 'takes in some data and a number (n)' do
-  #
-  #   end
-  #   it 'creates a new node with the data' do
-  #
-  #   end
-  #   it 'inserts the node as the nth item in the linked list' do
-  #
-  #   end
-  # end
+      it 'reduces the length of the list by 1' do
+        node_1.next = node_2
+        node_2.next = node_3
+        expect{ list.remove_from_end }.to change{ list.length }.from(3).to(2)
+      end
+      it 'removes the last node from the list' do
+        node_1.next = node_2
+        node_2.next = node_3
+        list.remove_from_end
+        expect(list.node_exists?(node_1)).to be true
+        expect(list.node_exists?(node_2)).to be true
+      end
+      it 'updates the head if needed' do
+        expect{list.remove_from_end}.to change{list.head}.from(node_1).to(nil)
+      end
+    end
+    context 'empty list' do
+      let(:empty_list) { SinglyLinkedList.new(nil) }
+      it 'has no effect on empty lists' do
+        expect{empty_list.remove_from_end}.not_to change{ empty_list }
+      end
+    end
+  end
 
-  # describe '#middle_node' do
-  #   it 'returns the node in the middle of the list' do
-  #   end
-  #   it 'returns the node to left of middle node in even-length lists' do
-  #
-  #   end
-  #   it 'returns nil for empty lists' do
-  #
-  #   end
-  # end
+  describe '#remove_from_start' do
+    context 'non-empty list' do
+      let(:node_1) { Node.new 1 }
+      let(:node_2) { Node.new 2 }
+      let(:node_3) { Node.new 3 }
+      subject(:list) { SinglyLinkedList.new node_1 }
+
+      it 'reduces the length of the list by 1' do
+        node_1.next = node_2
+        node_2.next = node_3
+        expect{ list.remove_from_start }.to change{ list.length }.from(3).to(2)
+      end
+      it 'removes the first node from the list' do
+        node_1.next = node_2
+        node_2.next = node_3
+        list.remove_from_start
+        expect(list.node_exists?(node_2)).to be true
+        expect(list.node_exists?(node_3)).to be true
+      end
+      it 'updates the head' do
+        node_1.next = node_2
+        expect{list.remove_from_start}.to change{list.head}.from(node_1).to(node_2)
+      end
+    end
+    context 'empty list' do
+      let(:empty_list) { SinglyLinkedList.new(nil) }
+      it 'has no effect on empty lists' do
+        expect{empty_list.remove_from_start}.not_to change{ empty_list }
+      end
+    end
+  end
+
+  describe '#middle_node' do
+    let(:node_1) { Node.new 1 }
+    let(:node_2) { Node.new 2 }
+    let(:node_3) { Node.new 3 }
+    let(:node_4) { Node.new 4 }
+    let(:node_5) { Node.new 5 }
+    subject(:even_length_list) { SinglyLinkedList.new node_1 }
+    subject(:odd_length_list) { SinglyLinkedList.new node_1 }
+    subject(:empty_list) { SinglyLinkedList.new(nil) }
+
+    it 'returns the node in the middle of the list for odd-length lists' do
+      node_1.next = node_2
+      node_2.next = node_3
+      node_3.next = node_4
+      node_4.next = node_5
+      expect(odd_length_list.middle_node).to eq(node_3)
+    end
+    it 'returns the left-middle node in even-length lists' do
+      node_1.next = node_2
+      node_2.next = node_3
+      node_3.next = node_4
+      expect(even_length_list.middle_node).to eq(node_2)
+    end
+    it 'returns nil for empty lists' do
+      expect(empty_list.middle_node).to be_nil
+    end
+  end
 
 end

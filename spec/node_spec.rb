@@ -1,5 +1,5 @@
-# require_relative '../models/node'
-require_relative '../solutions/node'
+require_relative '../starter-code/node'
+# require_relative '../solutions/node'
 
 describe Node do
   let!(:node) { Node.new('hello') }

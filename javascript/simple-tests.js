@@ -1,4 +1,6 @@
-var SinglyLinkedList = require('./singly-linked-list.js');
+// run this file with node simple-tests.js
+var SinglyLinkedList = require('./singly-linked-list-starter.js');
+var SinglyLinkedList = require('./singly-linked-list-solution.js');
 
 /* LinkedList initialization */
 var LinkedList = new SinglyLinkedList();
