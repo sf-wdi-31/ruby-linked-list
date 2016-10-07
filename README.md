@@ -1,8 +1,28 @@
+<!--
+Creator: Brianna
+Last edited by: Brianna
+Location: SF
+-->
+
+![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
+
 # Linked Lists
 
-### Objectives
+### Why is this important?
+<!-- framing the "why" in big-picture/real world examples -->
+*This workshop is important because:*
+
+- Data Structures are popular interview topics.  
+- Linked lists are a foundational data structure - understanding them will make it easier to understand stacks, queues, trees, graphs, and hash maps.  
+- The concept of a "pointer" - which stores a memory location, is common in lower-level programming languages. 
+
+
+### What are the objectives?
+<!-- specific/measurable goal for students to achieve -->
+*After this workshop, developers will be able to:*
 
 - Describe the low-level structure of arrays and linked lists.  
+- Manipulate linked lists.
 
 
 ## What are linked lists?
@@ -11,7 +31,9 @@
 
 Linked lists store sequential (ordered) data in a series of "nodes".  Each node in a linked list contains some value and a reference or "pointer" to the next node.
 
-The very last node of a linked list, called the tail, has a null next node because nothing comes after it.  (Most singly linked lists don't store a tail pointer, but ours is fancy.)
+Every linked list has a head, which is just the first node in the list.  A linked list itself is actually just storing the head node.
+
+The very last node of a linked list, called the tail, has a null next node because nothing comes after it.  Most singly linked lists don't store a reference directly to the tail, but it can make some operations smoother. 
 
 <img src="https://cloud.githubusercontent.com/assets/3254910/14589131/8456511c-048f-11e6-9ba3-1069f09591cd.jpg" width="300px" alt="wiggle snake toy">
 
@@ -73,27 +95,32 @@ On the other hand...
 
 ## Base Challenges
 
-Take a look at the method stubs in [singly-linked-list.js](./singly-linked-list.js).
-There's starter code for a singly linked list object type and a node object type.  
+Take a look at the starter code  for a singly linked list object type and a node object type.  
 
-Each node stores `data` and the `next` node.   The linked list stores its `head` and `tail`. The `head` and `tail` are both Nodes.   
+Each node stores `data` and the `next` node.   The linked list stores its `head`, which is a  `Node`.   
 
-There are some very simple tests in [simple-tests.js](./simple-tests.js).  Run the tests in your terminal with `node simple-tests.js`.
-
-If you haven't yet, clone this repo.  Change directories into the `linked-list` directory, and fill in the method stubs from singly-linked-list.js to your heart's content!  Methods like `delete` and `insertAt` are reasonable interview questions.
+If you haven't yet, clone this repo.  Fill in the method stubs from singly_linked_list.rb to your heart's content!  Methods like `delete` and `middle_node` are reasonable interview questions.
 
 
 ## Stretch Challenge
 
 These stretch challenges are harder interview questions. A hint for both: use two pointers to track two locations in the list.
 
-1. Write a method to find the middle node of a linked list. Can you do this while only looping through the list once?
+1. Write a method to find the nth-from-last node of a linked list. Can you do this while only looping through the list once?
 
 
 1. Cycles in linked lists (repeated nodes) can make them stop working for a lot of applications.  Write a method to detect whether a linked list has a cycle in it.
 
+## Closing Thoughts
+
+1. What is the difference between arrays and linked lists?
+
+1. How do you loop through a linked list?
+
+1. What is a pointer?
+
 ## Further Reading
 
-The article below goes step by step on creating a linked list and inserting items into it.  It might spoil some of today's solutions, but you can use this as a guide when dealing with linked lists and their properties:
+The article below goes step by step on creating a linked list and inserting items into it, in JavaScript.  It might spoil some of today's solutions, but you can use this as a guide when dealing with linked lists and their properties:
 
-<a href="http://code.tutsplus.com/articles/data-structures-with-javascript-singly-linked-list-and-doubly-linked-list--cms-23392" target="_blank">Linked List Guide</a>
+<a href="http://code.tutsplus.com/articles/data-structures-with-javascript-singly-linked-list-and-doubly-linked-list--cms-23392" target="_blank">JavaScript Linked List Guide</a>
