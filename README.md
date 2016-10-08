@@ -141,7 +141,7 @@ These stretch challenges are harder interview questions. A hint for both: use tw
 
 1. Cycles in linked lists (repeated nodes) can make them stop working for a lot of applications.  Write a method to detect whether a linked list has a cycle in it.
 
-## Closing Thoughts
+### Closing Thoughts
 
 1. What is the difference between arrays and linked lists?
 
@@ -149,7 +149,7 @@ These stretch challenges are harder interview questions. A hint for both: use tw
 
 1. What is a pointer?
 
-## Further Reading
+### Further Reading
 
 The article below goes step by step on creating a linked list and inserting items into it, in JavaScript.  It might spoil some of today's solutions, but you can use this as a guide when dealing with linked lists and their properties:
 
