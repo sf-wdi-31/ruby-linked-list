@@ -111,13 +111,19 @@ On the other hand...
 
 
 
-## Real-world Uses
+### Real-world Uses
 
 * **file systems** Files are often stored in chunks, but when files grow large they may not fit in their original chunk. You can think of a file as a series of nodes with chunks of data and links to the next section of the file. (They're often actually implemented with a more complex related data structure called a B-tree.)
 
 * **implementing stacks and queues** Linked lists are a natural choice for these data structures, which need fast access to beginning or end of a list.
 
-## Base Challenges
+### Whiteboarding
+
+1. On the whiteboard, draw a diagram and write pseudocode for `insert_at_end data` or `insertAtEnd(data)`. When you've confirmed your pseudocode works for some sample input, try translating it into code on the whiteboard. 
+
+1. On the whiteboard, draw a diagram and write pseudocode for `delete data` or `delete(data)`. If you were working in a pair with one marker, switch who's "driving." When you've confirmed your pseudocode works for some sample input, try translating it into code on the whiteboard. 
+
+### Base Coding Challenges
 
 Take a look at the starter code  for a singly linked list object type and a node object type.  
 
@@ -126,7 +132,7 @@ Each node stores `data` and the `next` node.   The linked list stores its `head`
 If you haven't yet, clone this repo.  Fill in the method stubs from singly_linked_list.rb to your heart's content!  Methods like `delete` and `middle_node` are reasonable interview questions.
 
 
-## Stretch Challenge
+### Stretch Challenges
 
 These stretch challenges are harder interview questions. A hint for both: use two pointers to track two locations in the list.
 
