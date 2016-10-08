@@ -71,6 +71,30 @@ Creating a linked list is a bit like renting buildings all around the city, wher
 
 In our analogy, you delegate a lot! You would know the address of the headquarters (the head or first node of the linked list). In a singly linked list, every node stores a pointer that gives the memory address of the next node. This is like letting each building manager keep track of just their address and the address of the *next* building you own.  In a doubly linked list, each node has pointers to the *next* and the *previous* node.
 
+### Check for Understanding
+
+1. What is the "big o" time complexity of inserting a node into a linked list after a given node?
+
+  <details><summary>click for some info</summary>
+  If we know exactly which node we're inserting after, we can just change a few nodes' `next` values.  This is O(1).
+  
+  However, if we didn't know which node to insert after, we might have to search for it based on some given data. In this case, it could take us O(n) just to find the right place before we can change around those few `next`s.  This is O(n).
+  </details>
+
+1. What is the "big o" time complexity of inserting a new value into an array at a given index?
+
+  <details><summary>click for some info</summary>
+  It depends! 
+  
+  In the worst cases where we're inserting near the start of an array, we'd need to move O(n) items down a slot, increasing each of their indices by 1, to make room for the new item. This is assuming the array had enough space reserved in memory to accommodate that item.
+  
+   If we have to resize, that's O(n) to move each value to a new location. 
+   
+   To combat this issue, though, arrays are implemented so that they only resize infrequently and they overestimate the new size they'll need (when addng one element to a 8-item array, the computer will acutally find space for a 16-item array).  This helps out in the case of adding an item to the end of the array (appending). The amortized cost (the average cost over many appends) is O(1).  
+  </details>
+  
+See [bigocheatsheet.com](http://bigocheatsheet.com/).
+
 ### Pros and Cons
 
 **Linked lists don't need to be resized with one giant block of memory;** they can grow with pointers to other parts of the computer's memory.  You don't have to find continuous free space.
